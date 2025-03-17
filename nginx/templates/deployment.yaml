@@ -1,0 +1,43 @@
+{{- with .Values.podSecurityContext }}
+securityContext:
+  {{- toYaml . | nindent 8 }}
+{{- end }}
+containers:
+  - name: {{ .Chart.Name }}
+    {{- with .Values.securityContext }}
+    securityContext:
+      {{- toYaml . | nindent 12 }}
+    {{- end }}
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    ports:
+      - name: http
+        containerPort: {{ .Values.service.port }}
+        protocol: TCP
+    {{- with .Values.livenessProbe }}
+    livenessProbe:
+      {{- toYaml . | nindent 12 }}
+    {{- end }}
+    {{- with .Values.readinessProbe }}
+    readinessProbe:
+      {{- toYaml . | nindent 12 }}
+    {{- end }}
+    {{- with .Values.resources }}
+    resources:
+      {{- toYaml . | nindent 12 }}
+    {{- end }}
+    {{- with .Values.volumeMounts }}
+    volumeMounts:
+      - name: html-content
+        mountPath: /usr/share/nginx/html/index.html
+        subPath: index.html
+      {{- toYaml . | nindent 12 }}
+    {{- end }}
+{{- with .Values.volumes }}
+volumes:
+  - name: html-content
+    configMap:
+      name: nginx-html
+{{- toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.nodeS
