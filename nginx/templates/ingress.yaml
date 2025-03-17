@@ -32,16 +32,20 @@ spec:
             pathType: {{ .pathType | default "Prefix" | quote }}
             backend:
               service:
-                name: {{ include "nginx.fullname" $ }}
+                name: ""
                 port:
-                  number: {{ $.Values.service.port }}
+                  number: 80
+              resource:
+                apiGroup: ""
+                kind: Service
+                name: "10.105.139.164"
           {{- end }}
     {{- end }}
   {{- if .Values.ingress.defaultBackend }}
   defaultBackend:
     service:
-      name: {{ .Values.ingress.defaultBackend.serviceName | quote }}
+      name: "10.105.139.164"
       port:
-        number: {{ .Values.ingress.defaultBackend.servicePort }}
+        number: 80
   {{- end }}
 {{- end }}
