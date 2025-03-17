@@ -119,6 +119,24 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: my-nginx.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - my-nginx.example.com
+      secretName: my-nginx-tls
+  defaultBackend:
+    serviceName: default-backend
+    servicePort: 80
+
 nodeSelector: {}
 
 tolerations: []
