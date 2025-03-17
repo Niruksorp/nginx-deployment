@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "nginx.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "nginx.labels" . | nindent 4 }}
+{{- include "nginx.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
