@@ -134,7 +134,7 @@ ingress:
         - my-nginx.example.com
       secretName: my-nginx-tls
   defaultBackend:
-    serviceName: default-backend
+    serviceName: nginx
     servicePort: 80
 
 nodeSelector: {}
