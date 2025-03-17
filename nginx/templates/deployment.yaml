@@ -33,11 +33,16 @@ containers:
         subPath: index.html
       {{- toYaml . | nindent 12 }}
     {{- end }}
+
 {{- with .Values.volumes }}
 volumes:
   - name: html-content
     configMap:
       name: nginx-html
-{{- toYaml . | nindent 8 }}
+  {{- toYaml . | nindent 8 }}
 {{- end }}
-{{- with .Values.nodeS
+
+{{- with .Values.nodeSelector }}
+nodeSelector:
+  {{- toYaml . | nindent 8 }}
+{{- end }}
