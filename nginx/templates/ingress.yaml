@@ -34,7 +34,7 @@ spec:
               service:
                 name: nginx
                 port:
-              number: 80
+                  number: 80
           {{- end }}
     {{- end }}
   {{- if .Values.ingress.defaultBackend }}
