@@ -19,7 +19,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-htmlContent: "Hello from Nginx VADIM LOX!"
+htmlContent: "Hello from Nginx heh!"
 
 
 # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
