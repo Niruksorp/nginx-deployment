@@ -110,7 +110,7 @@ ingress:
   hosts:
     - host: my-nginx.example.com
       paths:
-        - path: /
+        - path: /foo
           pathType: Prefix
   tls:
     - hosts:
